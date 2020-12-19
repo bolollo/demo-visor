@@ -1,0 +1,42 @@
+{
+  "name": "react-project-template",
+  "version": "0.1.5",
+  "private": true,
+  "dependencies": {
+    "@geostarters/eslint-config": "^0.0.6",
+    "@geostarters/react-components": "^0.3.4",
+    "eslint-plugin-flowtype": "^3.2.1",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
+    "react-scripts": "3.4.1"
+  },
+  "scripts": {
+    "lint": "eslint --fix --cache --ignore-path .gitignore src",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "test-flow": "flow .",
+    "build-docs": "documentation build --github --format json --config ./docs/documentation.yml --output docs/components/api.json src/index.js",
+    "lint-docs": "documentation lint src/index.js"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "documentation": "^9.1.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.1",
+    "enzyme-to-json": "^3.3.5",
+    "eslint-plugin-jest": "^22.5.1",
+    "flow-bin": "^0.89.0"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  }
+}
