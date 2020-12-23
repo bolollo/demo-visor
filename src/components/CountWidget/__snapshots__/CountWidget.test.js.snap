@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CountWidget component matches the snapshot  1`] = `
+<div
+  className="countWidget top-right"
+>
+  <div
+    className="labelStyle"
+  >
+    Count
+  </div>
+  <div
+    className="countStyle"
+  >
+    0
+  </div>
+</div>
+`;

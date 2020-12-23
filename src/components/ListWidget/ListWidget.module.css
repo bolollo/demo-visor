@@ -1,0 +1,57 @@
+.listWidget {
+    z-index:100;
+    margin: 0.5rem;
+    padding: 5px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    min-width: 150px;
+    opacity: 0.9;
+    height: calc(100% - 30px);
+    overflow-y: auto;
+    width: 170px;
+}
+
+.listWidget ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9em;
+}
+
+.selected{
+    font-weight: bold;
+}
+
+.small {
+    font-size: 0.6em;
+    color: #6c757d;
+}
+
+.bottom-right{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.bottom-left{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.top-right{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.top-left{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.relative{
+    position: relative;
+}
+
+.labelStyle {
+    font-size: 1em;
+    color: #6c757d;
+}
