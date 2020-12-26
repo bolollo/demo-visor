@@ -15,33 +15,10 @@ code {
 }
 
 :root {
-  --primary-color: #6f42c1; 
-  --primary-color-light: #0594ff;
-  --primary-color-dark: #00477c;
- 
-  --secondary-color: #008CC9;
-  --secondary-color-light: #00affc;
-  --secondary-color-dark: #006996;
-
+  --primary-color: #4e3858; 
   --primary-white: #fff;
   --primary-black: #000;
-  --disabled-color-light: #A4ABBD;
-  --disabled-color-light-alpha: #A4ABBD90;
-  --disabled-color-dark: #404756;
-  --contrast-color: #00CFA7;
-  --contrast-color-light:  #03ffce;
-  --primary-font-family: "Open Sans";
-  --secondary-font-family: "Open Sans Condensed";
-
-  --yellow-m-color: #ebbb22;
-  --yellow-m-color-light: #ffd440;
-
-  --green-a-color: #7db03f;
-  --green-a-color-light: #96c957;
- 
-  --blue-p-color: #41aad6;
-  --blue-p-color-light: #5fc3f0;
- 
-  --blue-s-color: #3164ab;
-  --blue-s-color-light: #4e7ac4;
+  --dark-grey: #343a40;
+  --middle-grey: #555555;
+  --light-grey: #6c757d;
 }

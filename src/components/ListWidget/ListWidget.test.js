@@ -35,4 +35,40 @@ describe("ListWidget component", () => {
 
 	});
 
+	it("Test click li", () => {
+
+		const mockClick = jest.fn();
+		const component = shallow(<ListWidget items={items} handleClick={mockClick}></ListWidget>);
+		component.find("li").at(1).simulate("click");
+		expect(mockClick).toHaveBeenCalled();
+
+	});
+
+	it("Test click selectAll", () => {
+
+		const mockClick = jest.fn();
+		const component = shallow(<ListWidget handleSelectAll={mockClick}></ListWidget>);
+		component.find(".selector span").at(0).simulate("click");
+		expect(mockClick).toHaveBeenCalled();
+
+	});
+
+	it("Test click selectNone", () => {
+
+		const mockClick = jest.fn();
+		const component = shallow(<ListWidget handleSelectNone={mockClick}></ListWidget>);
+		component.find(".selector span").at(1).simulate("click");
+		expect(mockClick).toHaveBeenCalled();
+
+	});
+
+	it("Test click selectInvert", () => {
+
+		const mockClick = jest.fn();
+		const component = shallow(<ListWidget handleSelectInvert={mockClick}></ListWidget>);
+		component.find(".selector span").at(2).simulate("click");
+		expect(mockClick).toHaveBeenCalled();
+
+	});
+
 });

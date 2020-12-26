@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LegendWidget component matches the snapshot  1`] = `
+<div
+  className="legendWidget bottom-right hidden"
+>
+  <div
+    className="icon"
+    onClick={[Function]}
+  >
+    <Icon
+      as="i"
+      link={true}
+      name="sort up"
+    />
+  </div>
+</div>
+`;

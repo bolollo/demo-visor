@@ -2,7 +2,7 @@
     z-index:100;
     margin: 0.5rem;
     padding: 5px;
-    background-color: #ffffff;
+    background-color: var(--primary-white, #ffffff);
     border-radius: 5px;
     min-width: 150px;
     opacity: 0.9;
@@ -15,7 +15,25 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
-    font-size: 0.9em;
+    font-size: 0.85em;
+}
+
+.listWidget ul li{
+    cursor: pointer;
+}
+
+.selector {
+    margin-bottom: 5px;
+    border-bottom: 1px solid;
+    border-bottom-color: var(--light-grey, #6c757d);
+    text-align: center;
+}
+
+.selector span{
+    margin-right: 5px;
+    color:var(--light-grey, #6c757d);
+    cursor: pointer;
+    font-size: 0.7em;
 }
 
 .selected{
@@ -24,7 +42,7 @@
 
 .small {
     font-size: 0.6em;
-    color: #6c757d;
+    color: var(--light-grey, #6c757d);
 }
 
 .bottom-right{
@@ -49,9 +67,4 @@
 }
 .relative{
     position: relative;
-}
-
-.labelStyle {
-    font-size: 1em;
-    color: #6c757d;
 }

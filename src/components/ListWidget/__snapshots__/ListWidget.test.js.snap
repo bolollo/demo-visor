@@ -4,6 +4,25 @@ exports[`ListWidget component matches the snapshot  1`] = `
 <div
   className="listWidget top-left"
 >
+  <div
+    className="selector"
+  >
+    <span
+      onClick={[Function]}
+    >
+      ALL
+    </span>
+    <span
+      onClick={[Function]}
+    >
+      NONE
+    </span>
+    <span
+      onClick={[Function]}
+    >
+      INVERT
+    </span>
+  </div>
   <ul />
 </div>
 `;

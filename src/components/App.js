@@ -6,13 +6,18 @@ import { Header, Footer } from "@geostarters/react-components";
 import IMAGES from "../resources/images";
 
 import DeckGL from "@deck.gl/react";
+
 import {MVTLayer} from "@deck.gl/geo-layers";
 import {StaticMap} from "react-map-gl";
+import Geostats from "geostats";
+import cartocolor from "cartocolor";
+import color from "color";
 
 import {MapboxLayer} from "@deck.gl/mapbox";
 
 import CountWidget from "./CountWidget/CountWidget";
 import ListWidget from "./ListWidget/ListWidget";
+import LegendWidget from "./LegendWidget/LegendWidget";
 
 const INITIAL_VIEW_STATE = {
 	longitude: -102.32,
@@ -28,13 +33,14 @@ function App() {
 	const [totalPopulation, setTotalPopulation] = useState(0);
 	const deckRef = useRef(null);
 	const mapRef = useRef(null);
+	const [populationSerie, setPopulationSerie] = useState();
+	const [ranges, setRanges] = useState([]);
+	const [colors, setColors] = useState([]);
 
 	const onMapLoad = useCallback(() => {
 
 		const map = mapRef.current.getMap();
 		const deck = deckRef.current.deck;
-
-		console.log(map);
 
 		// You must initialize an empty deck.gl layer to prevent flashing
 		map.addLayer(
@@ -74,11 +80,28 @@ function App() {
 	}, [selected]);
 
 
+	useEffect(() => {
+
+		if (populationSerie) {
+
+			setRanges(populationSerie.ranges);
+			setColors(populationSerie.colors);
+
+		}
+
+	}, [populationSerie]);
+
 	async function fetchEstados() {
 
 		const response = await fetch("https://demo-tierra.herokuapp.com/api/estados");
 		const json = await response.json();
 		setListEstados(json);
+		const populationData = json.map(item => item.p_total);
+		const dataSerie = new Geostats();
+		dataSerie.setSerie(populationData);
+		dataSerie.setColors(cartocolor.PurpOr["6"]);
+		dataSerie.getClassJenks(6);
+		setPopulationSerie(dataSerie);
 
 	}
 
@@ -105,7 +128,38 @@ function App() {
 
 	};
 
+	const handleSelectInvert = () => {
+
+		const invertSelectedFilter = listEstados.filter(item => !selected.find(item1 => item1.id === item.ogc_fid));
+		const invertSelected = invertSelectedFilter.map(item => ({id: item.ogc_fid, population: item.p_total}));
+		setSelected(invertSelected);
+
+	};
+
+	const handleSelectNone = () => {
+
+		setSelected([]);
+
+	};
+
+	const handleSelectAll = () => {
+
+		const allSelected = listEstados.map(item => ({id: item.ogc_fid, population: item.p_total}));
+		setSelected(allSelected);
+
+	};
+
 	const isSelected = f => selected.find(sel => sel.id === f.properties.ogc_fid);
+
+	const getColor = (f) => {
+
+		const colorC = color(populationSerie.colors[populationSerie.getRangeNum(f.properties.p_total)]);
+
+		const opacity = isSelected(f) ? 255 : 220;
+
+		return [...colorC.rgb().array(), opacity];
+
+	};
 
 	const layers = [
 		new MVTLayer({
@@ -116,38 +170,19 @@ function App() {
 			pickable: true,
 			uniqueIdProperty: "ogc_fid",
 			autoHighlight: true,
+			loadOptions: {mvt: {
+				layers: ["estados"]
+			}},
 			getLineColor: f => (isSelected(f) ? [52, 51, 50] : [84, 82, 81]),
 			lineWidthUnits: "pixels",
 			getLineWidth: f => (isSelected(f) ? 2 : 1),
 			lineWidthMinPixels: 1,
-			getFillColor: (f) => {
-
-				const opacity = isSelected(f) ? 255 : 220;
-
-				switch (true) {
-
-				case (f.properties.p_total < 1500000):
-					return [165, 219, 194, opacity];
-				case (f.properties.p_total < 2500000):
-					return [123, 188, 176, opacity];
-				case (f.properties.p_total < 4000000):
-					return [85, 156, 158, opacity];
-				case (f.properties.p_total < 6000000):
-					return [58, 124, 137, opacity];
-				case (f.properties.p_total < 10000000):
-					return [35, 93, 114, opacity];
-				default:
-					return [18, 63, 90, opacity];
-
-				}
-
-			},
+			getFillColor: getColor,
 			updateTriggers: {
 				getLineWidth: selected,
 				getLineColor: selected,
 				getFillColor: selected
 			}
-
 		})
 	];
 
@@ -184,7 +219,15 @@ function App() {
 						)}
 					</DeckGL>
 					<CountWidget count={totalPopulation} label={"Total Pupulation"}></CountWidget>
-					<ListWidget items={listEstados} handleClick={handleListClick} selected={selected}></ListWidget>
+					<ListWidget
+						items={listEstados}
+						handleClick={handleListClick}
+						selected={selected}
+						handleSelectAll={handleSelectAll}
+						handleSelectNone={handleSelectNone}
+						handleSelectInvert={handleSelectInvert}>
+					</ListWidget>
+					<LegendWidget ranges={ranges} colors={colors}></LegendWidget>
 				</div>
 			</div>
 

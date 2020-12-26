@@ -1,11 +1,32 @@
-.countWidget {
+.legendWidget{
     z-index:100;
     margin: 0.5rem;
     padding: 5px;
     background-color: var(--primary-white, #ffffff);
     border-radius: 5px;
-    min-width: 170px;
-    opacity: 0.9;
+    min-width: 150px;
+    opacity: 0.95;
+    clear:left;
+    font-size: 0.8em;
+}
+
+.icon {
+    cursor: pointer;
+    text-align: right;
+}
+
+.hidden {
+    min-width: 24px;
+}
+
+.legendBlock {
+    border: 1px solid;
+    border-color: var(--dark-grey, #555555);
+    display: block;
+    float: left;
+    height: 12px;
+    margin: 0 5px 0 0px;
+    width: 20px;
 }
 
 .bottom-right{
@@ -30,15 +51,4 @@
 }
 .relative{
     position: relative;
-}
-
-.labelStyle {
-    font-size: 1em;
-    color: var(--light-grey, #6c757d);
-}
-
-.countStyle {
-    font-size: 2em;
-    color: var(--dark-grey, #343a40);
-    text-align: center;
 }
