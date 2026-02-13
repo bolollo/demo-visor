@@ -13,7 +13,7 @@
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-map-gl": "^5.2.10",
-    "react-scripts": "3.4.1"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "lint": "eslint --fix --cache --ignore-path .gitignore src",
